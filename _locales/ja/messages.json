@@ -1,0 +1,18 @@
+{
+   "add_bookmark_here": {
+      "description": "\u3053\u306E\u30DA\u30FC\u30B8\u3092\u30D6\u30C3\u30AF\u30DE\u30FC\u30AF...",
+      "message": "\u3053\u306E\u30DA\u30FC\u30B8\u3092\u30D6\u30C3\u30AF\u30DE\u30FC\u30AF..."
+   },
+   "edit_bookmark": {
+      "description": "\u3053\u306E\u30D6\u30C3\u30AF\u30DE\u30FC\u30AF\u3092\u7DE8\u96C6...",
+      "message": "\u3053\u306E\u30D6\u30C3\u30AF\u30DE\u30FC\u30AF\u3092\u7DE8\u96C6..."
+   },
+   "reload": {
+      "description": "\u66F4\u65B0",
+      "message": "\u66F4\u65B0"
+   },
+   "manage_bookmarks": {
+      "description": "\u30D6\u30C3\u30AF\u30DE\u30FC\u30AF\u3092\u7BA1\u7406",
+      "message": "\u30D6\u30C3\u30AF\u30DE\u30FC\u30AF\u3092\u7BA1\u7406"
+   }
+}

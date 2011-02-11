@@ -1,0 +1,18 @@
+{
+   "add_bookmark_here": {
+      "description": "Add Bookmark Here...",
+      "message": "Add Bookmark Here..."
+   },
+   "edit_bookmark": {
+      "description": "Edit Bookmark...",
+      "message": "Edit Bookmark..."
+   },
+   "reload": {
+      "description": "Reload",
+      "message": "Reload"
+   },
+   "manage_bookmarks": {
+      "description": "Manage Bookmarks",
+      "message": "Manage Bookmarks"
+   }
+}

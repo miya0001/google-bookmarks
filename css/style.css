@@ -1,0 +1,103 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	background: transparent;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	vertical-align: baseline;
+    font-size: 14px;
+}
+body {
+    width: 400px;
+    overflow-x: hidden;
+}
+h1, h2, h3, h4, h5, h6 {
+	clear: both;
+	font-weight: normal;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote {
+	quotes: none;
+}
+blockquote:before, blockquote:after {
+	content: '';
+	content: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+#bm,
+#top,
+#foot
+{
+    width: 370px;
+    margin-top: 8px;
+    margin-left: 8px;
+	line-height: 1.5em;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#top
+{
+    border-bottom: 1px solid #cccccc;
+}
+
+#foot
+{
+    border-top: 1px solid #cccccc;
+    padding-top: 0.3em;
+}
+
+a {
+    text-decoration: none;
+    color: #444444;
+    display: block;
+}
+a:hover {
+    background-color: #0066ff;
+    color: #ffffff;
+}
+li {
+    margin-bottom: 0.3em;
+    padding-bottom: 0.3em;
+}
+li li,
+#uncats li,
+#foot li
+{
+    margin: 0 5px;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+a img {
+    margin-right: 5px;
+    width: 13px;
+    height: 13px;
+}
+strong {
+    margin-bottom: 0.25em;
+    background-image: url(../img/bg.png);
+    background-position: left center;
+    background-repeat: repeat-x;
+    padding: 3px;
+    width: 362px;
+    display: block;
+    font-weight: normal;
+    border: 1px solid #cccccc;
+}
+#uncats {
+    margin-top: 0.3em;
+    padding-top: 0.3em;
+    border-top: 1px solid #dedede;
+}

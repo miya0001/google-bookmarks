@@ -1,0 +1,14 @@
+{
+    "name": "Google Bookmarks",
+    "version": "0.1",
+    "description": "Google Bookmarks extension for chrome",
+    "default_locale": "en",
+    "background_page": "bg.html", 
+    "icons": { "48": "img/icon_48.png" },
+    "permissions": ["tabs", "http://*.google.com/"],
+    "browser_action": {
+        "default_title": "Bookmark",
+        "default_icon": "img/default.png",
+        "default_popup": "popup.html"
+    }
+}
