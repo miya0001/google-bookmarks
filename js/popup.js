@@ -22,6 +22,7 @@ function showContent(bg) {
             $(this).click(function(){
                 chrome.tabs.getSelected(null, function(tab){
                     chrome.tabs.update(tab.id, {url: href});
+                    window.close();
                 });
             });
         }
@@ -62,6 +63,7 @@ function showFoot(bg) {
             chrome.tabs.getSelected(null, function(tab){
                 var href = 'https://www.google.com/bookmarks/lookup';
                 chrome.tabs.update(tab.id, {url: href});
+                window.close();
             });
         }
     );

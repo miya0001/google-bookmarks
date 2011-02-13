@@ -1,6 +1,6 @@
 {
     "name": "Google Bookmarks",
-    "version": "0.1",
+    "version": "0.2",
     "description": "Google Bookmarks extension for chrome",
     "default_locale": "en",
     "background_page": "bg.html", 
