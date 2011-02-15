@@ -130,7 +130,6 @@ $(document).ready(function() {
     window.gb.load();
 
     chrome.tabs.onUpdated.addListener(function(tabid, changeinfo, tab){
-        //window.gb.get_current(tab);
         window.current = {};
         window.current.url = tab.url;
         window.current.title = tab.title;
