@@ -23,7 +23,16 @@ GB.prototype.load_bookmarks = function(data, dataType)
     window.auth_error = false;
     var bms = [];
     var uncats = [];
-    $('bookmark', data).each(function(){
+
+    var bookmarks = $('bookmark', data).sort(function(a, b){
+        a = $('title', a).text().toLowerCase();
+        b = $('title', b).text().toLowerCase();
+        if(a > b)  return 1;
+        if(a < b)  return -1;
+        return 0;
+    });
+
+    bookmarks.each(function(){
         var title = $('title', this).text();
         var url   = $('url', this).text();
 
@@ -40,7 +49,7 @@ GB.prototype.load_bookmarks = function(data, dataType)
             );
         }
 
-        var link = '<a href="'+url+'" title="'+title+'"><img src="'+favicon+'" />'+title+'</a>';
+        var link = '<a class="bookmark" href="'+url+'" title="'+title+'"><img src="'+favicon+'" />'+title+'</a>';
 
         var labels = $(this).find('label');
         if (labels.length) {
@@ -63,13 +72,19 @@ GB.prototype.load_bookmarks = function(data, dataType)
         keys.push(i);
     }
 
-    keys = keys.sort();
+    keys = keys.sort(function(a,b){
+        a = a.toString().toLowerCase();
+        b = b.toString().toLowerCase();
+        if(a > b)  return 1;
+        if(a < b)  return -1;
+        return 0;
+    });
 
     var ul = $('<ul></ul>');
     for (var n=0; n<keys.length; n++) {
         var label = keys[n];
         var li = $('<li />');
-        var strong = $('<strong />');
+        var strong = $('<a />', {"class":"label"});
         strong.text(label);
         li.append(strong);
         var child = $('<ul></ul>');

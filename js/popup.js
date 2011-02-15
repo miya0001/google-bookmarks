@@ -16,7 +16,7 @@ $(document).ready(function() {
 
 function showContent(bg) {
     $('#bm').html(bg.$('#content').html());
-    $('#bm').find('a').each(
+    $('#bm').find('a.bookmark').each(
         function(){
             var href = $(this).attr('href');
             $(this).click(function(){
@@ -27,6 +27,16 @@ function showContent(bg) {
             });
         }
     );
+    $('#bm').find('a.label').each(function(){
+        $(this).click(function(e){
+            var parentNode = $(e.target).parent().get(0);
+            $("a", parentNode).each(function(){
+                var href = $(this).attr('href');
+                chrome.tabs.create({url: href});
+                window.close();
+            });
+        });
+    });
     showTop(bg);
     showFoot(bg);
 }

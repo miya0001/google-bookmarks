@@ -1,6 +1,6 @@
 {
     "name": "Google Bookmarks",
-    "version": "0.3",
+    "version": "0.4",
     "update_url": "http://clients2.google.com/service/update2/crx",
     "description": "Google Bookmarks extension for chrome",
     "default_locale": "en",
