@@ -46,7 +46,7 @@ function showTop(bg) {
     var list = $('<li />');
     topMenu.append(list);
     var link = $('<a />', {id:'add', href:'#'});
-    if (bg.current.bookmarked) {
+    if (bg.current && bg.current.bookmarked) {
         link.text(chrome.i18n.getMessage("edit_bookmark"));
     } else {
         link.text(chrome.i18n.getMessage("add_bookmark_here"));

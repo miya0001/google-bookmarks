@@ -2,24 +2,9 @@ function GB() {
     this.XML = 'http://www.google.com/bookmarks/';
 }
 
-GB.prototype.get_current = function()
-{
-    chrome.tabs.getSelected(null, function(tab){
-        window.current = {};
-        window.current.url = tab.url;
-        window.current.title = tab.title;
-        if ($("[href='"+tab.url+"']", "#content").length) {
-            window.current.bookmarked = true;
-            chrome.browserAction.setIcon({path:'img/active.png'});
-        } else {
-            window.current.bookmarked = false;
-            chrome.browserAction.setIcon({path:'img/default.png'});
-        }
-    });
-}
-
 GB.prototype.load_bookmarks = function(data, dataType)
 {
+    $("#content").html('');
     window.auth_error = false;
     var bms = [];
     var uncats = [];
@@ -49,7 +34,14 @@ GB.prototype.load_bookmarks = function(data, dataType)
             );
         }
 
-        var link = '<a class="bookmark" href="'+url+'" title="'+title+'"><img src="'+favicon+'" />'+title+'</a>';
+        var link = $('<a />', {
+            'class': 'bookmark',
+            'href': url,
+            'title': title
+        })
+        var img = $('<img />', {'class':'favicon', 'src':favicon, 'alt':''})
+        link.append(img);
+        link.append(document.createTextNode(title));
 
         var labels = $(this).find('label');
         if (labels.length) {
@@ -112,7 +104,6 @@ GB.prototype.load_bookmarks = function(data, dataType)
 
 GB.prototype.load = function()
 {
-    $("#content").html('');
     $.ajax({
         type: 'GET',
         url: this.XML,
@@ -121,10 +112,10 @@ GB.prototype.load = function()
         cache: false,
         timeout: 10,
         data: {output:"xml", num:"1000"},
-        beforeSend: function(XMLHttpRequest){
+        beforeSend: function(xhr){
             return true;
         },
-        complete: function(XMLHttpRequest){
+        complete: function(xhr){
             return true;
         },
         success: this.load_bookmarks,
@@ -139,10 +130,17 @@ $(document).ready(function() {
     window.gb.load();
 
     chrome.tabs.onUpdated.addListener(function(tabid, changeinfo, tab){
-        window.gb.get_current();
-    });
-    chrome.tabs.onSelectionChanged.addListener(function(tabid, changeinfo, tab){
-        window.gb.get_current();
+        //window.gb.get_current(tab);
+        window.current = {};
+        window.current.url = tab.url;
+        window.current.title = tab.title;
+        if ($("[href='"+tab.url+"']", "#content").length) {
+            window.current.bookmarked = true;
+            chrome.browserAction.setIcon({path:'img/active.png', 'tabId':tabid});
+        } else {
+            window.current.bookmarked = false;
+            chrome.browserAction.setIcon({path:'img/default.png', 'tabId':tabid});
+        }
     });
 });
 
