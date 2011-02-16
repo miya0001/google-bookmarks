@@ -1,18 +1,28 @@
 $(document).ready(function() {
     var bg = chrome.extension.getBackgroundPage();
     if (bg.auth_error) {
-        bg.gb.load();
+        bg.gb.getSignature();
         if (!bg.auth_error) {
             showContent(bg);
             return;
         }
-
         gform();
         return;
     } else {
         showContent(bg);
     }
 });
+
+function deleteBookmark(bg) {
+    var url = "https://www.google.com/bookmarks/mark";
+/*
+    var args = {
+        zx: (new Date()).getTime(),
+        dlq: ?,
+        sig: bg.sig
+    }
+*/
+}
 
 function showContent(bg) {
     $('#bm').html(bg.$('#content').html());
@@ -30,7 +40,7 @@ function showContent(bg) {
     $('#bm').find('a.label').each(function(){
         $(this).click(function(e){
             var parentNode = $(e.target).parent().get(0);
-            $("a", parentNode).each(function(){
+            $("a.bookmark", parentNode).each(function(){
                 var href = $(this).attr('href');
                 chrome.tabs.create({url: href});
                 window.close();
@@ -85,7 +95,7 @@ function showFoot(bg) {
     list2.append(link2);
     link2.click(
         function(){
-            bg.gb.load();
+            bg.gb.getSignature();
             showContent(bg);
         }
     );

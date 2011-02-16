@@ -23,6 +23,7 @@ GB.prototype.load_bookmarks = function(data, dataType)
     bookmarks.each(function(){
         var title = $('title', this).text();
         var url   = $('url', this).text();
+        var id   = $('id', this).text();
 
         var favicon = 'img/favicon.png';
         var attr = $(this).find('attribute');
@@ -40,7 +41,8 @@ GB.prototype.load_bookmarks = function(data, dataType)
         var link = $('<a />', {
             'class': 'bookmark',
             'href': url,
-            'title': title
+            'title': title,
+            'id': id
         })
         var img = $('<img />', {'class':'favicon', 'src':favicon, 'alt':''})
         link.append(img);
@@ -128,6 +130,7 @@ GB.prototype.load = function()
         success: this.load_bookmarks,
         error: function(){
             window.auth_error = true;
+            chrome.browserAction.setPopup({popup:"popup.html"});
         }
     })
 }
@@ -155,6 +158,7 @@ GB.prototype.getSignature = function()
         },
         error: function(){
             window.auth_error = true;
+            chrome.browserAction.setPopup({popup:"popup.html"});
         }
     })
 }
