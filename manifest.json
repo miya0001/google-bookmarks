@@ -6,10 +6,9 @@
     "default_locale": "en",
     "background_page": "bg.html", 
     "icons": { "48": "img/icon_48.png" },
-    "permissions": ["tabs", "http://*.google.com/"],
+    "permissions": ["tabs", "https://*.google.com/"],
     "browser_action": {
         "default_title": "Bookmark",
-        "default_icon": "img/default.png",
-        "default_popup": "popup.html"
+        "default_icon": "img/error.png"
     }
 }

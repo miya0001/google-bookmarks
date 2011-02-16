@@ -1,11 +1,14 @@
 function GB() {
-    this.XML = 'http://www.google.com/bookmarks/';
+    this.XML = 'https://www.google.com/bookmarks/';
 }
 
 GB.prototype.load_bookmarks = function(data, dataType)
 {
     $("#content").html('');
     window.auth_error = false;
+    chrome.browserAction.setIcon({path:'img/default.png'});
+    chrome.browserAction.setPopup({popup:"popup.html"});
+
     var bms = [];
     var uncats = [];
 
@@ -100,6 +103,10 @@ GB.prototype.load_bookmarks = function(data, dataType)
 
         $('#content').append(uncatsUL);
     }
+
+    chrome.tabs.getSelected(null, function(tab){
+        window.gb.setCurrent(tab);
+    });
 }
 
 GB.prototype.load = function()
@@ -125,21 +132,59 @@ GB.prototype.load = function()
     })
 }
 
+
+GB.prototype.getSignature = function()
+{
+    $.ajax({
+        type: 'GET',
+        url: this.XML,
+        dataType: 'xml',
+        async: false,
+        cache: false,
+        timeout: 10,
+        data: {output:"rss", num:"1000"},
+        beforeSend: function(xhr){
+            return true;
+        },
+        complete: function(xhr){
+            return true;
+        },
+        success: function(data){
+            window.sig = $('signature', data).text();
+            window.gb.load();
+        },
+        error: function(){
+            window.auth_error = true;
+        }
+    })
+}
+
+
+GB.prototype.setCurrent = function(tab)
+{
+    window.current = {};
+    window.current.url = tab.url;
+    window.current.title = tab.title;
+    if ($("[href='"+tab.url+"']", "#content").length) {
+        window.current.bookmarked = true;
+        chrome.browserAction.setIcon({path:'img/active.png', 'tabId':tab.id});
+    } else {
+        window.current.bookmarked = false;
+        chrome.browserAction.setIcon({path:'img/default.png', 'tabId':tab.id});
+    }
+}
+
 $(document).ready(function() {
     window.gb = new GB();
-    window.gb.load();
+    window.gb.getSignature();
 
     chrome.tabs.onUpdated.addListener(function(tabid, changeinfo, tab){
-        window.current = {};
-        window.current.url = tab.url;
-        window.current.title = tab.title;
-        if ($("[href='"+tab.url+"']", "#content").length) {
-            window.current.bookmarked = true;
-            chrome.browserAction.setIcon({path:'img/active.png', 'tabId':tabid});
-        } else {
-            window.current.bookmarked = false;
-            chrome.browserAction.setIcon({path:'img/default.png', 'tabId':tabid});
-        }
+        window.gb.setCurrent(tab);
+    });
+    chrome.tabs.onSelectionChanged.addListener(function(tabid, selectInfo){
+        chrome.tabs.get(tabid, function(tab){
+            window.gb.setCurrent(tab);
+        });
     });
 });
 
