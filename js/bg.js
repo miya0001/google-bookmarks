@@ -1,3 +1,20 @@
+$(document).ready(function() {
+    window.gb = new GB();
+    window.gb.getSignature();
+    chrome.tabs.getSelected(null, function(tab){
+        this.scope.setCurrent(tab);
+    });
+
+    chrome.tabs.onUpdated.addListener(function(tabid, changeinfo, tab){
+        window.gb.setCurrent(tab);
+    });
+    chrome.tabs.onSelectionChanged.addListener(function(tabid, selectInfo){
+        chrome.tabs.get(tabid, function(tab){
+            window.gb.setCurrent(tab);
+        });
+    });
+});
+
 function GB() {
     this.XML = 'https://www.google.com/bookmarks/';
 }
@@ -28,14 +45,12 @@ GB.prototype.load_bookmarks = function(data, dataType)
         var favicon = 'img/favicon.png';
         var attr = $(this).find('attribute');
         if (attr.length) {
-            attr.each(
-                function(){
-                    var name = $(this).find('name').text();
-                    if (name == 'favicon_url') {
-                        favicon = $(this).find('value').text();
-                    }
+            attr.each(function(){
+                var name = $(this).find('name').text();
+                if (name == 'favicon_url') {
+                    favicon = $(this).find('value').text();
                 }
-            );
+            });
         }
 
         var link = $('<a />', {
@@ -50,15 +65,13 @@ GB.prototype.load_bookmarks = function(data, dataType)
 
         var labels = $(this).find('label');
         if (labels.length) {
-            labels.each(
-                function(){
-                    var label = $(this).text();
-                    if (!bms[label]) {
-                        bms[label] = [];
-                    }
-                    bms[label].push(link);
+            labels.each(function(){
+                var label = $(this).text();
+                if (!bms[label]) {
+                    bms[label] = [];
                 }
-            );
+                bms[label].push(link);
+            });
         } else {
             uncats.push(link);
         }
@@ -105,10 +118,6 @@ GB.prototype.load_bookmarks = function(data, dataType)
 
         $('#content').append(uncatsUL);
     }
-
-    chrome.tabs.getSelected(null, function(tab){
-        window.gb.setCurrent(tab);
-    });
 }
 
 GB.prototype.load = function()
@@ -145,7 +154,7 @@ GB.prototype.getSignature = function()
         async: false,
         cache: false,
         timeout: 10,
-        data: {output:"rss", num:"1000"},
+        data: {output:"rss"},
         beforeSend: function(xhr){
             return true;
         },
@@ -154,12 +163,13 @@ GB.prototype.getSignature = function()
         },
         success: function(data){
             window.sig = $('signature', data).text();
-            window.gb.load();
+            this.scope.load();
         },
         error: function(){
             window.auth_error = true;
             chrome.browserAction.setPopup({popup:"popup.html"});
-        }
+        },
+        scope: this
     })
 }
 
@@ -178,17 +188,4 @@ GB.prototype.setCurrent = function(tab)
     }
 }
 
-$(document).ready(function() {
-    window.gb = new GB();
-    window.gb.getSignature();
-
-    chrome.tabs.onUpdated.addListener(function(tabid, changeinfo, tab){
-        window.gb.setCurrent(tab);
-    });
-    chrome.tabs.onSelectionChanged.addListener(function(tabid, selectInfo){
-        chrome.tabs.get(tabid, function(tab){
-            window.gb.setCurrent(tab);
-        });
-    });
-});
 
