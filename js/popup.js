@@ -40,12 +40,6 @@ GBP.prototype.deleteBookmark = function(e)
                 async: false,
                 timeout: 10,
                 data: args,
-                beforeSend: function(xhr){
-                    return true;
-                },
-                complete: function(xhr){
-                    return true;
-                },
                 success: function(data){
                     e.data.bg.gb.getSignature();
                     chrome.tabs.getSelected(null, function(tab){
@@ -157,7 +151,7 @@ GBP.prototype.showFoot = function(bg)
     list2.append(link2);
     link2.bind('click', {scope: this}, function(e){
         bg.gb.getSignature();
-        e.data.scope.showContent(bg);
+        window.close();
     });
 
     $('#foot').html(footMenu);
