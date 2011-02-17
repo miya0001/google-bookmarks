@@ -51,6 +51,7 @@ del {
 #top
 {
     border-bottom: 1px solid #cccccc;
+    height: 21px;
 }
 
 #foot
@@ -109,3 +110,39 @@ a.label:hover
     padding-top: 0.3em;
     border-top: 1px solid #dedede;
 }
+
+a.add_bookmark,
+a.edit_bookmark,
+a.delete_bookmark
+{
+    display: block;
+    width: 18px;
+    height: 18px;
+    float: left;
+    text-indent: -9999px;
+    background-image: url(../img/ui.png);
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    margin: 0 3px;
+}
+
+a.add_bookmark:hover,
+a.edit_bookmark:hover,
+a.delete_bookmark:hover
+{
+    background-color: transparent;
+    background-position-y: top;
+    text-decoration: none;
+}
+
+a.edit_bookmark
+{
+    background-position-x: right;
+}
+
+a.delete_bookmark
+{
+    background-position-x: center;
+}
+

@@ -2,7 +2,7 @@ $(document).ready(function() {
     window.gb = new GB();
     window.gb.getSignature();
     chrome.tabs.getSelected(null, function(tab){
-        this.scope.setCurrent(tab);
+        window.gb.setCurrent(tab);
     });
 
     chrome.tabs.onUpdated.addListener(function(tabid, changeinfo, tab){
@@ -180,12 +180,9 @@ GB.prototype.setCurrent = function(tab)
     window.current.url = tab.url;
     window.current.title = tab.title;
     if ($("[href='"+tab.url+"']", "#content").length) {
-        window.current.bookmarked = true;
         chrome.browserAction.setIcon({path:'img/active.png', 'tabId':tab.id});
     } else {
-        window.current.bookmarked = false;
         chrome.browserAction.setIcon({path:'img/default.png', 'tabId':tab.id});
     }
 }
-
 

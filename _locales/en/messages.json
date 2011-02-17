@@ -14,5 +14,9 @@
    "manage_bookmarks": {
       "description": "Manage Bookmarks",
       "message": "Manage Bookmarks"
+   },
+   "delete_bookmark": {
+      "description": "Delete Bookmark",
+      "message": "Delete Bookmark"
    }
 }

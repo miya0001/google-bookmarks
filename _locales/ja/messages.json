@@ -14,5 +14,9 @@
    "manage_bookmarks": {
       "description": "\u30D6\u30C3\u30AF\u30DE\u30FC\u30AF\u3092\u7BA1\u7406",
       "message": "\u30D6\u30C3\u30AF\u30DE\u30FC\u30AF\u3092\u7BA1\u7406"
+   },
+   "delete_bookmark": {
+      "description": "\u3053\u306E\u30D6\u30C3\u30AF\u30DE\u30FC\u30AF\u3092\u524A\u9664",
+      "message": "\u3053\u306E\u30D6\u30C3\u30AF\u30DE\u30FC\u30AF\u3092\u524A\u9664"
    }
 }
