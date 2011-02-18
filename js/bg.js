@@ -4,7 +4,6 @@ $(document).ready(function() {
     chrome.tabs.getSelected(null, function(tab){
         window.gb.setCurrent(tab);
     });
-
     chrome.tabs.onUpdated.addListener(function(tabid, changeinfo, tab){
         window.gb.setCurrent(tab);
     });
@@ -15,16 +14,14 @@ $(document).ready(function() {
     });
 });
 
-function GB() {
+function GB(q) {
     this.XML = 'https://www.google.com/bookmarks/';
 }
 
 GB.prototype.load_bookmarks = function(data, dataType)
 {
     $("#content").html('');
-    window.auth_error = false;
     chrome.browserAction.setIcon({path:'img/default.png'});
-    chrome.browserAction.setPopup({popup:"popup.html"});
 
     var bms = [];
     var uncats = [];
@@ -120,16 +117,26 @@ GB.prototype.load_bookmarks = function(data, dataType)
     }
 }
 
-GB.prototype.load = function()
+GB.prototype.load = function(q)
 {
+    var searchURL;
+    var searchArgs;
+    if (q && $.trim(q)) {
+        searchURL = this.XML + 'find';
+        searchArgs = {output:"xml", num:"1000", q:$.trim(q)};
+    } else {
+        searchURL = this.XML;
+        searchArgs = {output:"xml", num:"1000"};
+    }
+
     $.ajax({
         type: 'GET',
-        url: this.XML,
+        url: searchURL,
         dataType: 'xml',
         async: false,
         cache: false,
         timeout: 10,
-        data: {output:"xml", num:"1000"},
+        data: searchArgs,
         beforeSend: function(xhr){
             return true;
         },
@@ -138,8 +145,7 @@ GB.prototype.load = function()
         },
         success: this.load_bookmarks,
         error: function(){
-            window.auth_error = true;
-            chrome.browserAction.setPopup({popup:"popup.html"});
+            return true;
         }
     })
 }
@@ -163,11 +169,10 @@ GB.prototype.getSignature = function()
         },
         success: function(data){
             window.sig = $('signature', data).text();
-            this.scope.load();
+            window.gb.load();
         },
         error: function(){
-            window.auth_error = true;
-            chrome.browserAction.setPopup({popup:"popup.html"});
+            return true;
         },
         scope: this
     })

@@ -9,6 +9,7 @@
     "permissions": ["tabs", "https://*.google.com/"],
     "browser_action": {
         "default_title": "Bookmark",
-        "default_icon": "img/error.png"
+        "default_icon": "img/error.png",
+        "popup": "popup.html"
     }
 }

@@ -9,9 +9,9 @@ function GBP(){
 GBP.prototype.init = function()
 {
     var bg = chrome.extension.getBackgroundPage();
-    if (bg.auth_error) {
+    if (!bg.$('a.bookmark').length) {
         bg.gb.getSignature();
-        if (!bg.auth_error) {
+        if (bg.$('a.bookmark').length) {
             this.showContent(bg);
             return;
         }
@@ -41,7 +41,7 @@ GBP.prototype.deleteBookmark = function(e)
                 timeout: 10,
                 data: args,
                 success: function(data){
-                    e.data.bg.gb.getSignature();
+                    e.data.bg.gb.load();
                     chrome.tabs.getSelected(null, function(tab){
                         e.data.bg.gb.setCurrent(tab);
                     });
@@ -150,7 +150,10 @@ GBP.prototype.showFoot = function(bg)
     link2.text(chrome.i18n.getMessage("reload"));
     list2.append(link2);
     link2.bind('click', {scope: this}, function(e){
-        bg.gb.getSignature();
+        bg.gb.load();
+        chrome.tabs.getSelected(null, function(tab){
+            bg.gb.setCurrent(tab);
+        });
         window.close();
     });
 
