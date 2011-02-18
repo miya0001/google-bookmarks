@@ -123,10 +123,11 @@ GB.prototype.load = function(q)
     var searchURL;
     var searchArgs;
     if (q && $.trim(q)) {
-        window.searchQeury = q;
+        window.searchQuery = q;
         searchURL = this.XML + 'find';
         searchArgs = {output:"xml", num:"1000", q:$.trim(q)};
     } else {
+        window.searchQuery = null;
         searchURL = this.XML;
         searchArgs = {output:"xml", num:"1000"};
     }

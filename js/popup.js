@@ -117,8 +117,8 @@ GBP.prototype.showTop = function ()
             'name': 'q',
             'id': 'q'
         });
-        if (bg.searchQeury) {
-            q.val(bg.searchQeury);
+        if (bg.searchQuery) {
+            q.val(bg.searchQuery);
         }
         var button = $('<input />', {
             'type': 'button',
