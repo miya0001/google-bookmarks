@@ -169,7 +169,7 @@ GB.prototype.getSignature = function()
         },
         success: function(data){
             window.sig = $('signature', data).text();
-            window.gb.load();
+            this.scope.load();
         },
         error: function(){
             return true;
