@@ -14,7 +14,7 @@ $(document).ready(function() {
     });
 });
 
-function GB(q) {
+function GB() {
     this.XML = 'https://www.google.com/bookmarks/';
 }
 
