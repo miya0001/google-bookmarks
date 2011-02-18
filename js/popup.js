@@ -12,13 +12,13 @@ GBP.prototype.init = function()
     if (!bg.$('a.bookmark').length) {
         bg.gb.getSignature();
         if (bg.$('a.bookmark').length) {
-            this.showContent(bg);
+            this.showContent();
             return;
         }
         this.gform();
         return;
     } else {
-        this.showContent(bg);
+        this.showContent();
     }
 }
 
@@ -57,8 +57,9 @@ GBP.prototype.deleteBookmark = function(e)
     }));
 }
 
-GBP.prototype.showContent = function(bg)
+GBP.prototype.showContent = function()
 {
+    var bg = chrome.extension.getBackgroundPage();
     $('#bm').html(bg.$('#content').html());
     $('#bm').find('a.bookmark').each(function(){
         var href = $(this).attr('href');
@@ -68,18 +69,6 @@ GBP.prototype.showContent = function(bg)
                 window.close();
             });
         });
-/*
-        $(this).hover(
-            function(){
-                chrome.windows.getCurrent(function(win){
-                    var views = chrome.extension.getViews({windowId:win.id});
-                    for (var i in views[0]) {
-                        console.log(i+':'+views[0][i]);
-                    }
-                });
-            }
-        );
-*/
     });
 
     $('#bm').find('a.label').each(function(){
@@ -93,15 +82,14 @@ GBP.prototype.showContent = function(bg)
         });
     });
 
-    this.showTop(bg);
-    this.showFoot(bg);
+    this.showTop();
+    this.showFoot();
 }
 
-GBP.prototype.showTop = function (bg)
+GBP.prototype.showTop = function ()
 {
-    var topMenu = $('<ul />');
-    var list = $('<li />');
-    topMenu.append(list);
+    var bg = chrome.extension.getBackgroundPage();
+    var topMenu = $('<div />');
 
     chrome.tabs.getSelected(null, $.scope(this, function(tab){
         var bookmarked = false;
@@ -111,24 +99,46 @@ GBP.prototype.showTop = function (bg)
 
         if (bookmarked) {
             var edit = this.createLink('edit_bookmark');
-            list.append(edit);
+            topMenu.append(edit);
             edit.click(this.gform);
 
             var del = this.createLink('delete_bookmark');
-            list.append(del);
+            topMenu.append(del);
             del.bind('click', {bg:bg, scope:this}, this.deleteBookmark);
         } else {
             var add = this.createLink('add_bookmark');
-            list.append(add);
+            topMenu.append(add);
             add.click(this.gform);
         }
+
+        var search = $('<div />', {id:'search'});
+        var q = $('<input />', {
+            'type': 'text',
+            'name': 'q',
+            'id': 'q'
+        });
+        if (bg.searchQeury) {
+            q.val(bg.searchQeury);
+        }
+        var button = $('<input />', {
+            'type': 'button',
+            'value': 'Search'
+        });
+        search.append(q);
+        search.append(button);
+
+        button.bind('click', this, this.search);
+        q.bind('keydown', this, this.search);
+
+        topMenu.append(search);
 
         $('#top').html(topMenu);
     }));
 }
 
-GBP.prototype.showFoot = function(bg)
+GBP.prototype.showFoot = function()
 {
+    var bg = chrome.extension.getBackgroundPage();
     var footMenu = $('<ul />');
 
     var list1 = $('<li />');
@@ -169,6 +179,14 @@ GBP.prototype.createLink = function(text)
     return link;
 }
 
+GBP.prototype.search = function(e)
+{
+    if (e.keyCode === 0 || e.keyCode === 13) {
+        var bg = chrome.extension.getBackgroundPage();
+        bg.gb.load($('#q').val());
+        e.data.showContent();
+    }
+}
 
 GBP.prototype.gform = function()
 {

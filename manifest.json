@@ -11,5 +11,6 @@
         "default_title": "Bookmark",
         "default_icon": "img/error.png",
         "popup": "popup.html"
-    }
+    },
+    "options_page": "options.html"
 }

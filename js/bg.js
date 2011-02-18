@@ -1,9 +1,6 @@
 $(document).ready(function() {
     window.gb = new GB();
     window.gb.getSignature();
-    chrome.tabs.getSelected(null, function(tab){
-        window.gb.setCurrent(tab);
-    });
     chrome.tabs.onUpdated.addListener(function(tabid, changeinfo, tab){
         window.gb.setCurrent(tab);
     });
@@ -53,7 +50,7 @@ GB.prototype.load_bookmarks = function(data, dataType)
         var link = $('<a />', {
             'class': 'bookmark',
             'href': url,
-            'title': title,
+            'title': url,
             'id': id
         })
         var img = $('<img />', {'class':'favicon', 'src':favicon, 'alt':''})
@@ -115,6 +112,10 @@ GB.prototype.load_bookmarks = function(data, dataType)
 
         $('#content').append(uncatsUL);
     }
+
+    chrome.tabs.getSelected(null, function(tab){
+        this.setCurrent(tab);
+    });
 }
 
 GB.prototype.load = function(q)
@@ -122,6 +123,7 @@ GB.prototype.load = function(q)
     var searchURL;
     var searchArgs;
     if (q && $.trim(q)) {
+        window.searchQeury = q;
         searchURL = this.XML + 'find';
         searchArgs = {output:"xml", num:"1000", q:$.trim(q)};
     } else {
