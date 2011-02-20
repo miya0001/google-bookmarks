@@ -1,0 +1,232 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	background: transparent;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	vertical-align: baseline;
+    font-size: 14px;
+}
+
+html,body
+{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #999999;
+    color: #555555;
+    background-image: url(../img/grey-bg.png);
+    display: -webkit-box;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+}
+h1, h2, h3, h4, h5, h6 {
+	clear: both;
+	font-weight: normal;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote {
+	quotes: none;
+}
+blockquote:before, blockquote:after {
+	content: '';
+	content: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+#wrap
+{
+    margin-bottom: 60px;
+    width: 700px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    -webkit-box-shadow: 4px 4px 5px #333333;
+}
+
+#header
+{
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 12px 8px;
+    background: -webkit-gradient(linear, 0 0, 0 100%,
+        color-stop(0, rgba(50, 50, 50, 0.9)),
+        color-stop(0.5, rgba(30, 30, 30, 0.9)),
+        color-stop(0.5, rgba(20, 20, 20, 0.9)),
+        color-stop(1, rgba(0, 0, 0, 0.9)));
+}
+
+h1
+{
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: bolder;
+    background-repeat: no-repeat;
+    background-position: left center;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+    font-weight: normal;
+}
+
+h1:before
+{
+    color: #ffffff;
+    content: "P";
+    font-size: 24px;
+    font-family: "IconicStroke";
+    font-weight: normal;
+    padding-right: 5px;
+}
+
+#footer
+{
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 8px;
+    background: -webkit-gradient(linear, 0 0, 0 100%,
+        color-stop(0, rgba(50, 50, 50, 0.9)),
+        color-stop(0.5, rgba(30, 30, 30, 0.9)),
+        color-stop(0.5, rgba(20, 20, 20, 0.9)),
+        color-stop(1, rgba(0, 0, 0, 0.9)));
+}
+
+#main
+{
+    padding: 10px;
+}
+
+#message
+{
+    z-index: 10;
+    background: #7fbf4d;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#7fbf4d), to(#63a62f));
+    border: 1px solid #63a62f;
+    border-bottom: 1px solid #5b992b;
+    -webkit-box-shadow: inset 0 1px 0 0 #96ca6d;
+    -webkit-box-shadow: 1px 1px 5px #555555;
+    text-shadow: 0 -1px 0 #4c9021;
+    color: #ffffff;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 698px;
+    text-indent: 12px;
+    opacity: 0;
+    display: none;
+    padding: 12px 0;
+    font-size: 24px;
+}
+
+#reset
+{
+}
+
+#save,
+#close
+{
+    display: block;
+    float: right;
+    margin-left: 10px;
+}
+
+#container
+{
+    position: relative;
+}
+
+fieldset
+{
+    border: 1px solid #dedede;
+    border-radius: 10px;
+    padding: 1em;
+    margin: 1em;
+}
+
+legend
+{
+    padding: 0 10px;
+}
+
+dt
+{
+    margin-bottom: 1em;
+    float: left;
+    clear: left;
+}
+
+dd
+{
+    float: right;
+}
+
+#message:before
+{
+    color: #ffffff;
+    content: "0";
+    font-size: 48px;
+    font-family: "IconicStroke";
+    font-weight: normal;
+    padding-right: 10px;
+    text-shadow: 0 -1px 0 #4c9021;
+}
+
+#donate
+{
+    width: 700px;
+    margin: 0 auto;
+    border-radius: 8px;
+    background-color: #ffffff;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f5f5f5), to(#dddddd));
+    border: 1px solid #555555;
+    -webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+    -webkit-box-shadow: 4px 4px 5px #333333;
+}
+
+#donate .content
+{
+    margin: 20px;
+    position: relative;
+}
+
+#donate a.paypal
+{
+    width: 66px;
+    height: 40px;
+    display: block;
+}
+
+#donate .msg
+{
+    font-family: "helvetica neue", helvetica, arial, sans-serif;
+    position: absolute;
+    top: 0px;
+    left: 75px;
+    height: 40px;
+}
+
+#donate .msg a
+{
+    text-decoration: none;
+    color: #555555;
+}
+
+#donate .msg a:hover
+{
+    text-decoration: underline;
+}
+

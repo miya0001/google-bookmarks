@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'IconicStroke';
+  src: url('../font/iconic_stroke.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -65,14 +72,17 @@ a {
     color: #444444;
     display: block;
 }
+
 a:hover {
     background-color: #0066ff;
     color: #ffffff;
 }
+
 li {
     margin-bottom: 0.3em;
     padding-bottom: 0.3em;
 }
+
 li li,
 #uncats li,
 #foot li
@@ -81,28 +91,50 @@ li li,
     padding-bottom: 0;
     border-bottom: none;
 }
+
 a img {
     margin-right: 5px;
     width: 13px;
     height: 13px;
 }
+
 a.label {
-    color: #444444;
+    background: #eee;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#eee), to(#ccc));
+    border: 1px solid #ccc;
+    border-bottom: 1px solid #bbb;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    text-shadow: 0 1px 0 #eee;
     margin-bottom: 0.25em;
-    background-color: #f5f5f5;
     padding: 3px 5px;
     width: 358px;
     display: block;
     font-weight: normal;
     cursor: pointer;
-    border-radius: 3px;
-    border: 1px solid #dedede;
+    color: #333333;
 }
+
 a.label:hover
 {
-    background-image: url(../img/bg.png);
-    background-position: 355px center;
-    background-repeat: no-repeat;
+    color: #333333;
+}
+
+a.label:after {
+    color: #555555;
+    content: "4";
+    display: block;
+    float: right;
+    font-size: 18px;
+    font-family: "IconicStroke";
+    font-weight: normal;
+    text-shadow: 0 1px 0px #fff;
+    visibility: hidden;
+    padding-top: 2px;
+}
+
+a.label:hover:after {
+  visibility: visible;
 }
 
 #uncats {
@@ -176,4 +208,73 @@ a.delete_bookmark
     cursor: pointer;
     margin-left: 5px;
 }
+
+#dialog-overlay
+{
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    background-color: #000000;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 3000;
+    display: none;
+}
+
+#dialog
+{
+    width: 100%;
+    position: fixed;
+    opacity: 0;
+    top: -100px;
+    z-index: 3001;
+    display: none;
+}
+
+#dialog .content
+{
+    width: 300px;
+    margin: 0 auto;
+    border-radius: 8px;
+    padding: 20px 8px;
+    background-color: #ffffff;
+    background: -webkit-gradient(linear, 0% 50%, 0% 100%, from(#ffffff), to(#dddddd));
+    border: 1px solid #555555;
+    -webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+    -webkit-box-shadow: 1px 1px 5px #555555;
+    text-shadow: 0 1px 0 #fff;
+    text-align: center;
+}
+
+#dialog .msg
+{
+    margin-bottom: 1em;
+}
+
+#dialog button
+{
+    background: #7a88a7;
+    background: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #7a88a7), color-stop(0.5, #465985), color-stop(0.5, #2d4375), color-stop(1, #324778));
+    border: 1px solid #0f1e46;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 1px 0 0 #b1b9cb, 0 1px 0 0 #596b94;
+    color: #fff;
+    font-family: "helvetica neue", helvetica, arial, sans-serif;
+    font-size: 14px;
+    padding: 4px 0;
+    text-shadow: 0 -1px 1px #000a32;
+    width: 100px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+#dialog button:hover,
+#dialog button:focus
+{
+    opacity: 1;
+    outline: none;
+}
+
 

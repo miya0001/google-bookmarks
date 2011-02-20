@@ -18,5 +18,29 @@
    "delete_bookmark": {
       "description": "Delete Bookmark",
       "message": "Delete Bookmark"
-   }
+    },
+    "always_open_bookmarks_in_new_tab": {
+        "description":"Always open bookmarks in new tab.",
+        "message":"Always open bookmarks in new tab."
+    },
+    "confirm_before_opening_all_bookmarks_in_label": {
+        "description": "Confirm before opening all bookmarks in label.",
+        "message": "Confirm before opening all bookmarks in label."
+    },
+    "Settings": {
+        "description": "Settings",
+        "message": "Settings"
+    },
+    "open_all_bookmarks_in": {
+        "description": "Open all bookmarks in \"%s\" ?",
+        "message": "Open all bookmarks in \"%s\" ?"
+    },
+    "donate_url": {
+        "description": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8RADH554RPKDU",
+        "message": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8RADH554RPKDU"
+    },
+    "donate_msg": {
+        "description": "We consider your donations as your votes for the new better Free Software.<br />The amount of donation is up to you. Thank you!",
+        "message": "We consider your donations as your votes for the new better Free Software.<br />The amount of donation is up to you. Thank you!"
+    }
 }

@@ -65,20 +65,25 @@ GBP.prototype.showContent = function()
         var href = $(this).attr('href');
         $(this).click(function(){
             chrome.tabs.getSelected(null, function(tab){
-                chrome.tabs.update(tab.id, {url: href});
-                window.close();
+                if (localStorage.getItem('open') === 'true') {
+                    chrome.tabs.create({url: href});
+                    window.close();
+                } else {
+                    chrome.tabs.update(tab.id, {url: href});
+                    window.close();
+                }
             });
         });
     });
 
+    var self = this;
     $('#bm').find('a.label').each(function(){
         $(this).click(function(e){
-            var parentNode = $(e.target).parent().get(0);
-            $("a.bookmark", parentNode).each(function(){
-                var href = $(this).attr('href');
-                chrome.tabs.create({url: href});
-                window.close();
-            });
+            if (localStorage.getItem('confirm') === 'true') {
+                self.showDialog(e.target);
+                return;
+            }
+            self.openBookmarks(e.target);
         });
     });
 
@@ -86,7 +91,59 @@ GBP.prototype.showContent = function()
     this.showFoot();
 }
 
-GBP.prototype.showTop = function ()
+GBP.prototype.openBookmarks = function(target)
+{
+    var parentNode = $(target).parent().get(0);
+    $("a.bookmark", parentNode).each(function(){
+        var href = $(this).attr('href');
+        chrome.tabs.create({url: href});
+        window.close();
+    });
+}
+
+GBP.prototype.showDialog = function(label)
+{
+    var self = this;
+
+    $("#search input[type=button]").attr('disabled', true);
+    $("#q").attr('disabled', true);
+
+    var style = {};
+    style.top = $('#dialog').css('top');
+    style.opacity = $('#dialog').css('opacity');
+    $("#dialog-overlay").fadeIn("fast", function(){
+        var msg = chrome.i18n.getMessage("open_all_bookmarks_in");
+        msg = msg.sprintf($(label).text())
+        $("#dialog").css('display', 'block');
+        $("#dialog .msg:first").text(msg);
+        var dialogTop = ($(window).height() - $('#dialog').height()) / 2;
+        $('#dialog').animate({
+            "opacity": 1,
+            "top": dialogTop
+        }, 300, function(){
+            $('#noBtn').bind('click', style, self.closeDialog);
+            $('#yesBtn').bind('click', label, function(e){
+                self.openBookmarks(e.data);
+            });
+            $('#noBtn').focus();
+        });
+    });
+}
+
+GBP.prototype.closeDialog = function(e)
+{
+    var style = e.data;
+    $('#dialog').css({
+        'opacity': style.opacity,
+        'top': style.top,
+        'display': 'none'
+    });
+    $("#dialog-overlay").fadeOut("fast");
+    $("#search input[type=button]").attr('disabled', false);
+    $("#q").attr('disabled', false);
+}
+
+GBP.prototype.showTop = function()
 {
     var bg = chrome.extension.getBackgroundPage();
     var topMenu = $('<div />');
