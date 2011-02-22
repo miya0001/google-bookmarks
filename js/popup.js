@@ -107,6 +107,7 @@ GBP.prototype.showDialog = function(label)
 
     $("#search input[type=button]").attr('disabled', true);
     $("#q").attr('disabled', true);
+    $("a").attr('tabindex', "-1");
 
     var style = {};
     style.top = $('#dialog').css('top');
@@ -141,6 +142,7 @@ GBP.prototype.closeDialog = function(e)
     $("#dialog-overlay").fadeOut("fast");
     $("#search input[type=button]").attr('disabled', false);
     $("#q").attr('disabled', false);
+    $("a").attr('tabindex', "0");
 }
 
 GBP.prototype.showTop = function()
