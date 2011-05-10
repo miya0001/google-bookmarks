@@ -84,7 +84,6 @@ GB.prototype.load_bookmarks = function(data, dataType)
         return 0;
     });
 
-    var ul = $('<ul></ul>');
     for (var n=0; n<keys.length; n++) {
         var label = keys[n];
         var li = $('<li />');
@@ -98,7 +97,7 @@ GB.prototype.load_bookmarks = function(data, dataType)
             child.append(link);
         }
         li.append(child);
-        ul.append(li);
+        $('<ul></ul>').append(li);
     }
     $('#content').append(ul);
 
