@@ -15,7 +15,7 @@ GBP.prototype.init = function()
             this.showContent();
             return;
         }
-        this.gform();
+        //this.gform();
         return;
     } else {
         this.showContent();
