@@ -249,21 +249,16 @@ GBP.prototype.search = function(e)
 
 GBP.prototype.gform = function()
 {
-    $('#top').hide();
-    $('#bm').hide();
-    $('#foot').hide();
-    $('body').css('width', '580px');
+    window.close();
     chrome.tabs.getSelected(null, function(tab) {
         var title = tab.title;
         var url = tab.url;
-        var iframe = $('<iframe />');
-        iframe.attr(
-            "src",
-            'http://www.google.com/bookmarks/mark?op=edit&output=popup&bkmk=' + encodeURIComponent(url) + '&title=' + encodeURIComponent(title)
-        );
-        iframe.css('width', '100%');
-        iframe.css('height', '450px');
-        $("body").append(iframe);
+        chrome.windows.create({
+            url: "http://www.google.com/bookmarks/mark?op=edit&output=popup&bkmk=" + tab.url + "&title=" + tab.title,
+            type: "popup",
+            height: 500,
+            width: 550
+        });
     });
 }
 
